@@ -1,0 +1,10 @@
+.form-group(ng-class='{"has-error": errors}')
+  label.col-sm-2.control-label {{ label }}
+  .col-sm-10
+    tags-input(
+      ng-model='tagsModel'
+      min-length='2'
+      on-tag-added='onTagAdded()'
+      on-tag-removed='onTagRemoved()'
+    )
+    p.help-block(ng-repeat='msg in errors') {{ msg }}

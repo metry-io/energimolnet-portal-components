@@ -1,0 +1,10 @@
+.form-group(ng-class='{"has-error": errors}')
+  label.col-sm-2.control-label {{ label }}
+  .col-sm-10
+    em-autocomplete(
+      em-model='model'
+      em-api-resource='apiResource()'
+      em-placeholder='{{ placeholder }}'
+      em-query-params='queryParams'
+    )
+    p.help-block(ng-repeat='msg in errors') {{ msg }}

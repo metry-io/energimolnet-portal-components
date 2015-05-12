@@ -1,0 +1,7 @@
+.form-group(ng-class='{"has-error": errors}')
+  .col-sm-offset-2.col-sm-10
+    .checkbox
+      label
+        input(type='checkbox', ng-model='model')
+        | {{ label }}
+    p.help-block(ng-repeat='msg in errors') {{ msg }}

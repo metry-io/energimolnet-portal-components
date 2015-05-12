@@ -1,0 +1,25 @@
+.form-group(ng-class='{"has-error": errors}')
+  label.col-sm-2.control-label {{ label }}
+  .col-sm-10
+    input(
+      type='file'
+      ng-file-select='uploadFiles($files)'
+    )
+    div.drop-box(
+      ng-file-drop='uploadFiles($files)'
+      ng-file-drag-over-class='drag-over'
+      ng-file-drop-available='dropSupported=true'
+    )
+    div(ng-show='dropSupported && !model') Drop files here
+    img(ng-show='showThumbnail(model)', ng-src='{{ model }')
+    a(
+      ng-show='model'
+      ng-href='{{ model }}'
+      target='_blank'
+    ) {{ model }}
+    button.btn.btn-default.btn-xs(ng-click='upload.abort()') Cancel Upload
+    button.btn.btn-danger.btn-xs(
+      ng-click='deleteFile(model)'
+      ng-show='model'
+    ) Delete file
+    p.help-block(ng-repeat='msg in errors') {{ msg }}
