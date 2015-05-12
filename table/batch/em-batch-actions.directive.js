@@ -12,9 +12,9 @@ angular.module('portal-components')
                     '<span class="caret" style="margin-left: 10px"></span>' +
                   '<ul class="dropdown-menu" ng-transclude></ul>',
     scope: {},
-    require: '^emBatchManager',
-    link: function(scope, element, attrs, batchManagerCtrl) {
-      var batchMgr = batchManagerCtrl.batchMgr;
+    require: '^emResourceTable',
+    link: function(scope, element, attrs, resourceTableCtrl) {
+      var batchMgr = resourceTableCtrl.batchMgr;
       scope.batchMgr = batchMgr;
 
       scope.change = function change() {

@@ -11,9 +11,9 @@ angular.module('portal-components')
       item: '=emItem',
       index: '=emIndex'
     },
-    require: '^emBatchManager',
-    link: function(scope, element, attrs, batchManagerCtrl) {
-      var batchMgr = batchManagerCtrl.batchMgr;
+    require: '^emResourceTable',
+    link: function(scope, element, attrs, resourceTableCtrl) {
+      var batchMgr = resourceTableCtrl.batchMgr;
 
       scope.batchItems = batchMgr.selected;
 
