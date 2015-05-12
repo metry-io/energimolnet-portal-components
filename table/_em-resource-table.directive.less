@@ -1,4 +1,4 @@
-table.em-table2 {
+table[em-resource-table] {
   table-layout: fixed;
 
   > tbody > tr.em-row > td,
@@ -22,7 +22,6 @@ table.em-table2 {
       }
 
       &.em-action-group {
-        width: 8%;
         text-align: right;
         vertical-align: bottom;
 
@@ -64,13 +63,15 @@ table.em-table2 {
 
   > tbody {
     > tr {
-      &.em-clickable {
-        cursor: pointer;
-      }
-
       > td {
         border-top: none;
         vertical-align: middle;
+
+        a {
+          display: block;
+          width: 100%;
+          color: @em-color-text-dark;
+        }
 
         &.em-batch-checkbox {
           width: 5%;
@@ -78,11 +79,13 @@ table.em-table2 {
         }
 
         &.em-action-group {
-          width: 8%;
           text-align: right;
 
           a.btn {
             .btn-xs();
+            display: inline;
+            width: auto;
+            color: @em-color-text-white;
           }
         }
       }
