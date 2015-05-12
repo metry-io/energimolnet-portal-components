@@ -5,13 +5,15 @@ angular.module('portal-components')
   '$modal',
   '$location',
   function($timeout, $modal,  $location) {
-    function ResourceManager(Resource, filter, refreshTime) {
+    function ResourceManager(Resource, filter, refreshTime, batchCallback) {
       this.Resource = Resource;
       this.refreshTime = (refreshTime === undefined) ? false : refreshTime;
       this.loading = false;
       this.data = [];
       this.pagination = {};
       this.filter = angular.extend(filter || {}, $location.search);
+      this.batchMgr = undefined;
+      this.batchCallback = batchCallback;
 
       this._refreshTimeout = undefined;
       this._lastParams = {};
@@ -55,6 +57,20 @@ angular.module('portal-components')
       });
     };
 
+    ResourceManager.prototype.runBatchAction = function runBatchAction(type, value) {
+      // TODO: This should rather be handled by resource directly, i.e. Meters.batch()
+      if (!this.batchCallback || !this.batchMgr) return;
+
+      var _this = this;
+      var items = this.data.filter(function(item, index) {
+        return _this.batchMgr.isSelected(index);
+      });
+
+      if (items.length === 0) return;
+
+      this.batchCallback(type, value, items, refreshData);
+    };
+
     // Private get data function
     ResourceManager.prototype._getData = function _getData(offset) {
       var params = angular.copy(this.filter),
@@ -74,16 +90,19 @@ angular.module('portal-components')
           _this.pagination = res.pagination;
           _this.setRefreshTimeout();
 
-  //        if (vm.batchEnabled) {
-  //          vm.batch.reset(res.data.length);
-  //        }
+          if (_this.batchMgr) {
+            _this.batchMgr.reset(res.data.length);
+          }
         }
       }, function(err) {
         if (angular.equals(params, _this.lastParams)) {
           _this.loading = false;
           _this.data = [];
           _this.pagination = {};
-          //vm.batch.reset(0);
+
+          if (_this.batchMgr) {
+            _this.batchMgr.reset(0);
+          }
         }
       });
     };
