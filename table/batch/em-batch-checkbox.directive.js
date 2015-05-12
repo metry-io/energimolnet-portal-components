@@ -8,7 +8,6 @@ angular.module('portal-components')
                 '<input type="checkbox" ng-model="items[index]" ng-change="change">' +
               '</div>',
     scope: {
-      item: '=emItem',
       index: '=emIndex'
     },
     require: '^emResourceTable',
