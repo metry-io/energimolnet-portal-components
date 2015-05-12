@@ -24,6 +24,7 @@ angular.module('portal-components')
     ResourceManager.prototype.setFilterOption = function setFilter(key, value) {
       this.filter[key] = value;
       this.getData(0);
+      $location.search(this.filter).replace();
     };
 
     ResourceManager.prototype.updatePage = function updatePage() {
