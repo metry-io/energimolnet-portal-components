@@ -13,10 +13,10 @@ angular.module('portal-components')
       }
     },
     controller: function($scope) {
-      this.resMgr = scope.resMgr;
+      this.resMgr = $scope.resMgr;
 
-      if (scope.batchMgr) {
-        this.resMgr.batchMgr = scope.batchMgr;
+      if ($scope.batchMgr) {
+        this.resMgr.batchMgr = $scope.batchMgr;
       }
     }
   };
