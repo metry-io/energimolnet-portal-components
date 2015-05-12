@@ -1,4 +1,4 @@
-angular.module('energimolnet.ui')
+angular.module('portal-components')
 
 .factory('emBatchManager', function() {
   function BatchUpdateManager (length, changeCallback) {
