@@ -4,7 +4,7 @@ angular.module('energimolnet.ui')
   return {
     restrict: 'E',
     template: '<div class="heder" ng-if="::sort">' +
-                '<a href="" ng-click="toggleSort title="{{ title }}" tabindex="-1">{{ title }}&nbsp;' +
+                '<a href="" ng-click="toggleSort()" title="{{ title }}" tabindex="-1">{{ title }}&nbsp;' +
                   '<span class="glyphicon glyphicon-triangle-top small" ng-show="resMgr.filter.sort === sort">' +
                   '<span class="glyphicon glyphicon-triangle-bottom small" ng-show="resMgr.filter.sort === \'-\' + sort">' +
                 '</a>' +
