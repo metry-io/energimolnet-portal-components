@@ -38,7 +38,7 @@ angular.module('portal-components')
       this._getData(offset);
     };
 
-    ResourceManager.prototype.refreshData = function refreshData() {
+    ResourceManager.prototype.refresh = function refresh() {
       var p = _this.pagination;
       _this._getData(p.limit ? p.limit * (p.page - 1) : 0);
     };
@@ -54,7 +54,7 @@ angular.module('portal-components')
       }).result.then(function(res) {
         return _this.Resource.delete(item._id);
       }).then(function (res) {
-        _this.refreshData();
+        _this.refresh();
       });
     };
 
@@ -69,7 +69,7 @@ angular.module('portal-components')
 
       if (items.length === 0) return;
 
-      this.batchCallback(type, value, items, refreshData);
+      this.batchCallback(type, value, items, refresh);
     };
 
     // Private get data function
@@ -111,7 +111,7 @@ angular.module('portal-components')
     // Refresh data
     ResourceManager.prototype.setRefreshTimeout = function setRefreshTimeout() {
       if (this.refreshTime && !this.refreshTimeout) {
-        this.refreshTimeout = $timeout(this.refreshData.bind(this), this.refreshTime);
+        this.refreshTimeout = $timeout(this.refresh.bind(this), this.refreshTime);
       }
     };
 
