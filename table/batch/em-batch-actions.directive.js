@@ -18,7 +18,11 @@ angular.module('portal-components')
       scope.batchMgr = batchMgr;
 
       scope.change = function change() {
-        batchMgr.selectAll(scope.batch.allSelected);
+        batchMgr.selectAll(batchMgr.allSelected);
+      };
+
+      scope.stopProp = function(event) {
+        event.stopPropagation();
       };
     }
   };
