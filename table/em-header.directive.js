@@ -3,7 +3,6 @@ angular.module('energimolnet.ui')
 .directive('emHeader', function() {
   return {
     restrict: 'E',
-    templateUrl: 'app/components/table/em-header.directive.tmpl.jade',
     template: '<div class="heder" ng-if="::sort">' +
                 '<a href="" ng-click="toggleSort title="{{ title }}" tabindex="-1">{{ title }}&nbsp;' +
                   '<span class="glyphicon glyphicon-triangle-top small" ng-show="resMgr.filter.sort === sort">' +
