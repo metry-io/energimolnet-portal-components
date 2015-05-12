@@ -69,7 +69,7 @@ angular.module('portal-components')
 
       if (items.length === 0) return;
 
-      this.batchCallback(type, value, items, refresh);
+      this.batchCallback(type, value, items);
     };
 
     // Private get data function
