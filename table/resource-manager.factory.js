@@ -84,7 +84,7 @@ angular.module('portal-components')
       this._lastParams = params;
 
       this.Resource.query(params).then(function(res) {
-        if (angular.equals(params, _this.lastParams)) {
+        if (angular.equals(params, _this._lastParams)) {
           _this.loading = false;
           _this.data = res.data;
           _this.pagination = res.pagination;
@@ -95,7 +95,7 @@ angular.module('portal-components')
           }
         }
       }, function(err) {
-        if (angular.equals(params, _this.lastParams)) {
+        if (angular.equals(params, _this._lastParams)) {
           _this.loading = false;
           _this.data = [];
           _this.pagination = {};
