@@ -9,7 +9,7 @@ angular.module('portal-components')
                   '<span class="glyphicon glyphicon-triangle-bottom small" ng-show="resMgr.filter.sort === \'-\' + sort">' +
                 '</a>' +
               '</div>' +
-              '<div class="header" ng-if="::!resMgr.filter.sort", title="{{ title }}">{{ title }}</div>',
+              '<div class="header" ng-if="::!sort", title="{{ title }}">{{ title }}</div>',
     scope: {
       sort: '@emSort',
       title: '@emTitle',
