@@ -7,9 +7,11 @@ angular.module('portal-components')
       resMgr: '=emResourceManager',
       batchMgr: '=?emBatchManager'
     },
-    bindToController: true,
-    controller: function() {
-      if (this.batchMgr) {
+    controller: function($scope) {
+      this.resMgr = $scope.resMgr;
+
+      if ($scope.batchMgr) {
+        this.batchMgr = $scope.batchMgr;
         this.resMgr.batchMgr = this.batchMgr;
       }
     }
