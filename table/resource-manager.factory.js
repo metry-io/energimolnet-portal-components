@@ -18,7 +18,7 @@ angular.module('portal-components')
       this._refreshTimeout = undefined;
       this._lastParams = {};
 
-      this._getData(0);
+      this.getData(0);
     }
 
     ResourceManager.prototype.setFilterOption = function setFilter(key, value) {
