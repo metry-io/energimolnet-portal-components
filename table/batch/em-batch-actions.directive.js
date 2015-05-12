@@ -8,7 +8,7 @@ angular.module('portal-components')
     template: '<div class="em-batch-actions">' +
                 '<div class="dropdown" dropdown>' +
                   '<button class="btn btn-primary dropdown-toggle" dropdown-toggle style="padding: 6px">' +
-                    '<input type="checkbox" ng-model="batchMgr.allSelected" ng-change="change()">' +
+                    '<input type="checkbox" ng-model="batchMgr.allSelected" ng-change="change()" ng-click="stopProp($event)">' +
                     '<span class="caret" style="margin-left: 10px"></span>' +
                   '<ul class="dropdown-menu" ng-transclude></ul>',
     scope: {},
@@ -18,7 +18,11 @@ angular.module('portal-components')
       scope.batchMgr = batchMgr;
 
       scope.change = function change() {
-        batchMgr.selectAll(scope.batch.allSelected);
+        batchMgr.selectAll(batchMgr.allSelected);
+      };
+
+      scope.stopProp = function(event) {
+        event.stopPropagation();
       };
     }
   };
