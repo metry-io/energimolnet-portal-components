@@ -5,7 +5,7 @@ angular.module('portal-components')
     restrict: 'E',
     replace: true,
     template: '<div class="em-batch-checkbox">' +
-                '<input type="checkbox" ng-model="items[index]" ng-change="change">' +
+                '<input type="checkbox" ng-model="items[index]" ng-change="change()">' +
               '</div>',
     scope: {
       index: '=emIndex'
@@ -14,10 +14,10 @@ angular.module('portal-components')
     link: function(scope, element, attrs, resourceTableCtrl) {
       var batchMgr = resourceTableCtrl.batchMgr;
 
-      scope.batchItems = batchMgr.selected;
+      scope.items = batchMgr.selected;
 
       scope.change = function() {
-        batchMgr.select(scope.index, scope.batchItems[scope.index]);
+        batchMgr.select(scope.index, scope.items[scope.index]);
       };
     }
   };
