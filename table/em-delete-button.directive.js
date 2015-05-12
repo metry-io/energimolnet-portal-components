@@ -11,10 +11,10 @@ angular.module('portal-components')
     template: '<a href="" class="btn btn-danger" ng-click="click()">' +
                 '<span class="glyphicon glyphicon-trash"></span>' +
               '</a>',
-    require: '^emResourceManager',
-    link: function(scope, element, attrs, resourceManagerCtrl) {
+    require: '^emResourceTable',
+    link: function(scope, element, attrs, resourceTableCtrl) {
       scope.click = function() {
-        resourceManagerCtrl.deleteItem(scope.item, scope.deleteText);
+        resourceTableCtrl.deleteItem(scope.item, scope.deleteText);
       };
     }
   };

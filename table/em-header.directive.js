@@ -14,9 +14,9 @@ angular.module('portal-components')
       sort: '@emSort',
       title: '@emTitle',
     },
-    require: '^emResourceManager',
-    link: function(scope, element, attrs, resourceManagerCtrl) {
-      var resMgr = resourceManagerCtrl.resMgr;
+    require: '^emResourceTable',
+    link: function(scope, element, attrs, resourceTableCtrl) {
+      var resMgr = resourceTableCtrl.resMgr;
       scope.resMgr = resMgr;
 
       scope.toggleSort = function() {

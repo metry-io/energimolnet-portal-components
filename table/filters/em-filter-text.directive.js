@@ -15,9 +15,9 @@ angular.module('portal-components')
       key: '@emKey',
       placeholder: '@emPlaceholder'
     },
-    require: '^emResourceManager',
-    link: function(scope, element, attrs, resourceManagerCtrl) {
-      var resMgr = resourceManagerCtrl.resMgr;
+    require: '^emResourceTable',
+    link: function(scope, element, attrs, resourceTableCtrl) {
+      var resMgr = resourceTableCtrl.resMgr;
 
       scope.filter = resMgr.filter[scope.key];
 
