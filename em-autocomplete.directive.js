@@ -35,6 +35,7 @@ angular.module('portal-components')
         event.preventDefault();
         event.stopPropagation();
         scope.selectOption(undefined);
+        scope.value = undefined;
       };
 
       scope.onBlur = function(event) {
@@ -45,11 +46,13 @@ angular.module('portal-components')
         return true;
       };
 
-      if (scope.model && scope.model.length > 0) {
+      scope.$watch('model', function(newModel, oldModel) {
+        if (scope.value || !newModel) return;
+
         scope.apiResource().get(scope.model).then(function(resource) {
           scope.value = resource;
         });
-      }
+      });
     }
   };
 });

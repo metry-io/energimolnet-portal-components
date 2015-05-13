@@ -15,7 +15,7 @@ angular.module('portal-components')
                 '</div>',
       scope: {
         key: '@emKey',
-        placeholder: '@emPlaceholder',
+        placeholder: '@emPlaceholder'
       },
       require: '^emResourceTable',
       link: function(scope, element, attrs, resourceTableCtrl) {
