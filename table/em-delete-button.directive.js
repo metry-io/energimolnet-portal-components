@@ -14,7 +14,7 @@ angular.module('portal-components')
     require: '^emResourceTable',
     link: function(scope, element, attrs, resourceTableCtrl) {
       scope.click = function() {
-        resourceTableCtrl.deleteItem(scope.item, scope.deleteText);
+        resourceTableCtrl.resMgr.deleteItem(scope.item, scope.deleteText);
       };
     }
   };

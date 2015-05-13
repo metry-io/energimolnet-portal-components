@@ -39,15 +39,15 @@ angular.module('portal-components')
     };
 
     ResourceManager.prototype.refresh = function refresh() {
-      var p = _this.pagination;
-      _this._getData(p.limit ? p.limit * (p.page - 1) : 0);
+      var p = this.pagination;
+      this._getData(p.limit ? p.limit * (p.page - 1) : 0);
     };
 
     ResourceManager.prototype.deleteItem = function deleteItem(item, deleteText) {
       var _this = this;
 
       $modal.open({
-        templateUrl: 'app/components/table/modal-delete.tmpl.jade',
+        templateUrl: 'delete-modal.html',
         controller: ['$scope', function ($scope) {
           $scope.deleteText = deleteText;
         }]
