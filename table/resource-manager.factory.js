@@ -11,7 +11,7 @@ angular.module('portal-components')
       this.loading = false;
       this.data = [];
       this.pagination = {};
-      this.filter = angular.extend(filter || {}, $location.search);
+      this.filter = angular.extend(filter || {}, $location.search());
       this.batchMgr = undefined;
       this.batchCallback = batchCallback;
 
