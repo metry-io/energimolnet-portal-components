@@ -7,10 +7,10 @@ angular.module('portal-components')
       restrict: 'E',
       replace: true,
       template: '<div class="form-group" ng-class="{\'has-success\': filter.length > 0}">' +
-                '<em-autocomplete' +
-                  'em-model="filter"' +
-                  'em-placeholder="{{ placeholder }}"' +
-                  'em-api-resource="resource"' +
+                '<em-autocomplete ' +
+                  'em-model="filter" ' +
+                  'em-placeholder="{{ placeholder }}" ' +
+                  'em-api-resource="Resource" ' +
                   'em-query-params="queryParams"></em-autocomplete>' +
                 '</div>',
       scope: {

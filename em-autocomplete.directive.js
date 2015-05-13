@@ -14,19 +14,16 @@ angular.module('portal-components')
     },
     link: function(scope, element, attrs) {
       scope.value = undefined;
-      scope.options = [];
       scope.displayKey = scope.displayKey || 'name';
       scope.queryKey = scope.queryKey || 'name';
-
-      var Resource = scope.apiResource();
 
       scope.getOptions = function(query) {
         var params = scope.queryParams ? angular.copy(scope.queryParams) :  {};
         params[scope.queryKey] = query;
         params.sort = name;
 
-        Resource.query(params).then(function(res) {
-          scope.options = res.data;
+        return scope.apiResource().query(params).then(function(res) {
+          return res.data;
         });
       };
 
@@ -49,7 +46,7 @@ angular.module('portal-components')
       };
 
       if (scope.model && scope.model.length > 0) {
-        Resource.get(scope.model).then(function(resource) {
+        scope.apiResource().get(scope.model).then(function(resource) {
           scope.value = resource;
         });
       }
