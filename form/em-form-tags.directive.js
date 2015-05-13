@@ -12,14 +12,14 @@ angular.module('app.directives')
     link: function(scope, element, attrs) {
       // Convert array of strings to tag objects
       function makeTags(model) {
-        return model.map(function(t) {
-          return (typeof t === 'string') ? {text: t} : t;
+        return model.map(function(tag) {
+          return (typeof tag === 'string') ? {text: tag} : tag;
         });
       }
 
       // Convert array of tag objects to string
       function makeModel(tags) {
-        return tags.map(function(t) {
+        return tags.map(function(tag) {
           return tag.text || tag;
         });
       }
