@@ -2,7 +2,7 @@ angular.module('app.directives')
 
 .directive('emFormTextarea', ->
   return {
-    templateUrl: 'app/components/form/em-form-textarea.directive.tmpl.jade'
+    template: '<div ng-class="{&quot;has-error&quot;: errors}" class="form-group"><label class="col-sm-2 control-label">{{ label }}</label><div class="col-sm-10"><textarea ng-model="model" rows="4" class="form-control"></textarea><p ng-repeat="msg in errors" class="help-block">{{ msg }}</p></div></div>', 
     restrict: 'E'
     scope:
       model: '=emModel'

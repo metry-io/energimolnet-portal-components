@@ -2,7 +2,7 @@ angular.module('app.directives')
 
 .directive('emFormTags', ->
   return {
-    templateUrl: 'app/components/form/em-form-tags.directive.tmpl.jade'
+    template: '<div ng-class="{&quot;has-error&quot;: errors}" class="form-group"><label class="col-sm-2 control-label">{{ label }}</label><div class="col-sm-10"><tags-input ng-model="tagsModel" min-length="2" on-tag-added="onTagAdded()" on-tag-removed="onTagRemoved()"></tags-input><p ng-repeat="msg in errors" class="help-block">{{ msg }}</p></div></div>', 
     restrict: 'E'
     scope:
       model: '=emModel'

@@ -2,7 +2,14 @@ angular.module('app.directives')
 
 .directive('emFormCheckbox', ->
   return {
-    templateUrl: 'app/components/form/em-form-checkbox.directive.tmpl.jade'
+    template: '<div class="form-group" ng-class="{\'has-error\': errors}">' +
+                '<div class="col-sm-offset-2 col-sm-10">' +
+                  '<div class="checkbox">' +
+                    '<label><input type="checkbox" ng-model="model" /> {{ label }}</label>' +
+                  '</div>' +
+                  '<p class="help-block" ng-repeat="msg in errors">{{ msg }}</p>' +
+                '</div>' +
+              '</div>',
     restrict: 'E'
     scope:
       model: '=emModel'

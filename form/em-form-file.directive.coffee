@@ -5,7 +5,7 @@ angular.module('app.directives')
   'emUrl'
   ($upload, Url) ->
     return {
-      templateUrl: 'app/components/form/em-form-file.directive.tmpl.jade'
+      template: '<div ng-class="{&quot;has-error&quot;: errors}" class="form-group"><label class="col-sm-2 control-label">{{ label }}</label><div class="col-sm-10"><input type="file" ng-file-select="uploadFiles($files)"/><div ng-file-drop="uploadFiles($files)" ng-file-drag-over-class="drag-over" ng-file-drop-available="dropSupported=true" class="drop-box"></div><div ng-show="dropSupported &amp;&amp; !model">Drop files here</div><img ng-show="showThumbnail(model)" ng-src="{{ model }"/><a ng-show="model" ng-href="{{ model }}" target="_blank">{{ model }}</a><button ng-click="upload.abort()" class="btn btn-default btn-xs">Cancel Upload</button><button ng-click="deleteFile(model)" ng-show="model" class="btn btn-danger btn-xs">Delete file</button><p ng-repeat="msg in errors" class="help-block">{{ msg }}</p></div></div>',
       restrict: 'E'
       scope:
         model: '=emModel'
