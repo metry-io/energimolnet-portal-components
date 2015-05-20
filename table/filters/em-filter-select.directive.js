@@ -15,7 +15,6 @@ angular.module('portal-components')
     require: '^emResourceTable',
     link: function(scope, element, attrs, resourceTableCtrl) {
       var resMgr = resourceTableCtrl.resMgr;
-      console.log('Default value: ', scope.default);
 
       scope.filter = resMgr.filter[scope.key];
 
