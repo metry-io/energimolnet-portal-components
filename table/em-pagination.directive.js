@@ -4,7 +4,7 @@ angular.module('portal-components')
   return {
     restrict: 'E',
     template: '<div class="text-center" ng-show="!resMgr.loading">' +
-              '<pagination boundary-links="true" ng-model="resMgr.pagination.page" ng-change="resMgr.updatePage()" total-items="resMgr.pagination.count" items-per-page="resMgr.pagination.limit" max-size="10">' +
+              '<pagination boundary-links="true" ng-model="resMgr.pagination.page" ng-change="resMgr.updatePage()" total-items="resMgr.pagination.count" items-per-page="resMgr.pagination.limit" max-size="10"></pagination>' +
               '<p>Showing {{ resMgr.pagination.from }} to {{ resMgr.pagination.to }} of {{ resMgr.pagination.count }}</p>' +
               '</div>',
     scope: {
