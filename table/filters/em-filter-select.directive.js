@@ -5,15 +5,17 @@ angular.module('portal-components')
     restrict: 'E',
     replace: true,
     transclude: true,
-    template: '<div class="form-group" ng-class="{\'has-success\': filter.length}">' +
+    template: '<div class="form-group" ng-class="{\'has-success\': filter.length && filter !== default}">' +
                 '<select class="form-control" ng-model="filter" ng-transclude><option value=""></option></select>' +
               '</div>',
     scope: {
       key: '@emKey',
+      default: '=emDefaultValue'
     },
     require: '^emResourceTable',
     link: function(scope, element, attrs, resourceTableCtrl) {
       var resMgr = resourceTableCtrl.resMgr;
+      console.log('Default value: ', scope.default);
 
       scope.filter = resMgr.filter[scope.key];
 
