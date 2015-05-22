@@ -18,29 +18,30 @@ angular.module('portal-components')
       this._refreshTimeout = undefined;
       this._lastParams = {};
 
-      this.getData(0);
+      this.getData();
     }
 
     ResourceManager.prototype.setFilterOption = function setFilter(key, value) {
       this.filter[key] = value;
-      this.getData(0);
-      $location.search(this.filter).replace();
+      this.filter.skip = 0;
+      this.getData();
     };
 
     ResourceManager.prototype.updatePage = function updatePage() {
-      this.getData(this.pagination.limit * (this.pagination.page - 1));
+      this.filter.skip = this.pagination.limit * (this.pagination.page - 1);
+      this.getData();
     };
 
-    ResourceManager.prototype.getData = function(offset) {
+    ResourceManager.prototype.getData = function() {
+      $location.search(this.filter).replace();
       this.loading = true;
       this.data = [];
       this.pagination = {page: 1};
-      this._getData(offset);
+      this._getData();
     };
 
     ResourceManager.prototype.refresh = function refresh() {
-      var p = this.pagination;
-      this._getData(p.limit ? p.limit * (p.page - 1) : 0);
+      this._getData();
     };
 
     ResourceManager.prototype.deleteItem = function deleteItem(item, deleteText) {
@@ -73,13 +74,9 @@ angular.module('portal-components')
     };
 
     // Private get data function
-    ResourceManager.prototype._getData = function _getData(offset) {
+    ResourceManager.prototype._getData = function _getData() {
       var params = angular.copy(this.filter),
           _this = this;
-
-      if (offset > 0) {
-        params.skip = offset;
-      }
 
       this.clearRefreshTimeout();
       this._lastParams = params;
