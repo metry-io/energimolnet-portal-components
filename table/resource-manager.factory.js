@@ -24,16 +24,17 @@ angular.module('portal-components')
     ResourceManager.prototype.setFilterOption = function setFilter(key, value) {
       this.filter[key] = value;
       this.filter.skip = 0;
+      $location.search(this.filter).replace();
       this.getData();
     };
 
     ResourceManager.prototype.updatePage = function updatePage() {
       this.filter.skip = this.pagination.limit * (this.pagination.page - 1);
+      $location.search(this.filter).replace();
       this.getData();
     };
 
     ResourceManager.prototype.getData = function() {
-      $location.search(this.filter).replace();
       this.loading = true;
       this.data = [];
       this.pagination = {page: 1};
