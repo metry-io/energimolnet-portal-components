@@ -1,0 +1,49 @@
+table.table.table-striped.em-expandable[em-resource-table] > tbody > tr {
+  background-color: transparent;
+
+  &:nth-child(4n-3) {
+    background-color: @table-bg-accent;
+  }
+
+  &:hover {
+    background-color: lighten(@em-color-green, 50%);
+  }
+}
+
+table.em-expandable[em-resource-table] > tbody {
+  > tr[em-expandable-row] {
+    cursor: pointer;
+
+    &.em-expanded > td {
+      background-color: darken(@em-color-background-dark, 50%);
+      color: @em-color-white;
+    }
+
+    &.em-expanded:hover > td {
+      background-color: darken(@em-color-background-dark, 50%);
+    }
+  }
+
+  > tr.em-expandable-row-content {
+    border: none;
+
+    &:hover {
+      td {
+        background-color: transparent;
+      }
+    }
+
+    > td {
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      border: none;
+
+      &.em-expanded {
+        height: auto;
+        background-color: @em-color-background-dark;
+        color: @em-color-white;
+      }
+    }
+  }
+}
