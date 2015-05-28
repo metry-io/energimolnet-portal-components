@@ -6,7 +6,7 @@ angular.module('portal-components')
     replace: true,
     transclude: true,
     template: '<div class="form-group" ng-class="{\'has-success\': filter.length && filter !== default}">' +
-                '<select class="form-control" ng-model="filter" ng-transclude></select>' +
+                '<select class="form-control" ng-model="filter" ng-transclude><option value=""></option></select>' +
               '</div>',
     scope: {
       key: '@emKey',
