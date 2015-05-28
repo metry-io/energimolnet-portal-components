@@ -17,11 +17,18 @@ angular.module('portal-components')
       var resMgr = resourceTableCtrl.resMgr;
 
       scope.filter = resMgr.filter[scope.key];
+      scope.resMgrFilter = resMgr.filter;
 
       scope.$watch('filter', function(newFilter, oldFilter) {
         if (newFilter === oldFilter) return;
 
         resMgr.setFilterOption(scope.key, newFilter);
+      });
+
+      scope.$watch('resMgrFilter.' + scope.key, function(newFilter, oldFilter) {
+        if (newFilter === oldFilter) return;
+
+        scope.filter = newFilter;
       });
     }
   };
