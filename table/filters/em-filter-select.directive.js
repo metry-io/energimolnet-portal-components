@@ -1,6 +1,6 @@
 angular.module('portal-components')
 
-.directive('emFilterSelect', function($timeout) {
+.directive('emFilterSelect', function() {
   return {
     restrict: 'E',
     replace: true,
