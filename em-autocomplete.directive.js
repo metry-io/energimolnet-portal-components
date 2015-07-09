@@ -37,8 +37,9 @@ angular.module('portal-components')
       };
 
       scope.onBlur = function(event) {
-        if (!scope.model) {
+        if (!scope.value) {
           event.target.value = '';
+          scope.model = undefined;
         }
 
         return true;
