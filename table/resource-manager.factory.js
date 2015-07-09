@@ -42,6 +42,7 @@ angular.module('portal-components')
     };
 
     ResourceManager.prototype.refresh = function refresh() {
+      if (!this.refreshTime) return;
       this._getData();
     };
 
@@ -108,15 +109,15 @@ angular.module('portal-components')
 
     // Refresh data
     ResourceManager.prototype.setRefreshTimeout = function setRefreshTimeout() {
-      if (this.refreshTime && !this.refreshTimeout) {
-        this.refreshTimeout = $timeout(this.refresh.bind(this), this.refreshTime);
+      if (this.refreshTime && !this._refreshTimeout) {
+        this._refreshTimeout = $timeout(this.refresh.bind(this), this.refreshTime);
       }
     };
 
     ResourceManager.prototype.clearRefreshTimeout = function clearRefreshTimeout() {
-      if (this.refreshTimeout) {
-        $timeout.cancel(this.refreshTimeout);
-        this.refreshTimeout = undefined;
+      if (this._refreshTimeout) {
+        $timeout.cancel(this._refreshTimeout);
+        this._refreshTimeout = undefined;
       }
     };
 
