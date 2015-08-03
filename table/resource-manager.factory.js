@@ -41,11 +41,6 @@ angular.module('portal-components')
       this._getData();
     };
 
-    ResourceManager.prototype.refresh = function refresh() {
-      if (!this.refreshTime) return;
-      this._getData();
-    };
-
     ResourceManager.prototype.deleteItem = function deleteItem(item, deleteText) {
       var _this = this;
 
@@ -57,7 +52,7 @@ angular.module('portal-components')
       }).result.then(function(res) {
         return _this.Resource.delete(item._id);
       }).then(function (res) {
-        _this.refresh();
+        _this._getData();
       });
     };
 
@@ -108,6 +103,11 @@ angular.module('portal-components')
     };
 
     // Refresh data
+    ResourceManager.prototype.refresh = function refresh() {
+      if (!this.refreshTime) return;
+      this._getData();
+    };
+
     ResourceManager.prototype.setRefreshTimeout = function setRefreshTimeout() {
       if (this.refreshTime && !this._refreshTimeout) {
         this._refreshTimeout = $timeout(this.refresh.bind(this), this.refreshTime);
