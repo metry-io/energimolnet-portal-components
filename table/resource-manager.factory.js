@@ -104,13 +104,15 @@ angular.module('portal-components')
 
     // Refresh data
     ResourceManager.prototype.refresh = function refresh() {
-      if (!this.refreshTime) return;
       this._getData();
     };
 
     ResourceManager.prototype.setRefreshTimeout = function setRefreshTimeout() {
       if (this.refreshTime && !this._refreshTimeout) {
-        this._refreshTimeout = $timeout(this.refresh.bind(this), this.refreshTime);
+        this._refreshTimeout = $timeout(function() {
+          if (!this.refreshTime) return;
+          _this.refresh();
+        }, this.refreshTime);
       }
     };
 
