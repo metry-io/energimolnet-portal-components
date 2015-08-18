@@ -109,8 +109,10 @@ angular.module('portal-components')
 
     ResourceManager.prototype.setRefreshTimeout = function setRefreshTimeout() {
       if (this.refreshTime && !this._refreshTimeout) {
+        var _this = this;
+
         this._refreshTimeout = $timeout(function() {
-          if (!this.refreshTime) return;
+          if (!_this.refreshTime) return;
           _this.refresh();
         }, this.refreshTime);
       }
