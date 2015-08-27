@@ -11,12 +11,13 @@ angular.module('app.directives')
     return {
       restrict: 'E',
       scope: true,
-      template: '<div class="em-consumption-header"><div class="btn-group" ng-if="meter.metrics.length > 1" class="text-center"><label class="btn btn-primary btn-sm" ng-model="$parent.$parent.selectedMetric" btn-radio="\'{{metric}}\'" ng-repeat="metric in meter.metrics">{{ metric | metricName }}</label></div></div><table ng-show="!loading && data != null" class="em-consumption-table"><thead><tr><th></th><th>jan</th><th>feb</th><th>mar</th><th>apr</th><th>maj</th><th>jun</th><th>jul</th><th>aug</th><th>sep</th><th>okt</th><th>nov</th><th>dec</th><th></th></tr></thead><tbody><tr ng-repeat="year in data[selectedMetric]"><td>{{year.year}}</td><td ng-repeat="month in year.series track by $index" ng-bind-html="::month | consumptionValue | trust"></td><td></td></tr></tbody></table><div ng-show="!loading && meter.active && data == null" style="height: 80px" class="em-flexbox em-flex-vertical em-flex-justify-center"><div class="text-center">Det finns ingen insamlad data för denna mätpunkt.</div></div><div ng-show="!meter.active" style="height: 80px" class="em-flexbox em-flex-vertical em-flex-justify-center"><div class="text-center"><p>Mätpunkten är inaktiverad. Insamling garanteras endast för aktiva mätpunkter.</p></div></div><div ng-show="loading" style="height: 80px" class="em-spinner-dark"></div>',
+      template: '<div class="em-consumption-header"><div class="btn-group" ng-if="metrics.length > 1" class="text-center"><label class="btn btn-primary btn-sm" ng-model="$parent.$parent.selectedMetric" btn-radio="\'{{metric}}\'" ng-repeat="metric in metrics">{{ metric | metricName }}</label></div></div><table ng-show="!loading && data != null" class="em-consumption-table"><thead><tr><th></th><th>jan</th><th>feb</th><th>mar</th><th>apr</th><th>maj</th><th>jun</th><th>jul</th><th>aug</th><th>sep</th><th>okt</th><th>nov</th><th>dec</th><th></th></tr></thead><tbody><tr ng-repeat="year in data[selectedMetric]"><td>{{year.year}}</td><td ng-repeat="month in year.series track by $index" ng-bind-html="::month | consumptionValue | trust"></td><td></td></tr></tbody></table><div ng-show="!loading && meter.active && data == null" style="height: 80px" class="em-flexbox em-flex-vertical em-flex-justify-center"><div class="text-center">Det finns ingen insamlad data för denna mätpunkt.</div></div><div ng-show="!meter.active" style="height: 80px" class="em-flexbox em-flex-vertical em-flex-justify-center"><div class="text-center"><p>Mätpunkten är inaktiverad. Insamling garanteras endast för aktiva mätpunkter.</p></div></div><div ng-show="loading" style="height: 80px" class="em-spinner-dark"></div>',
       controller: ['$scope', function($scope) {
         $scope.data = undefined;
         $scope.loading = false;
         $scope.meter = $scope.model;
         $scope.selectedMetric = 'energy';
+        $scope.metrics = Object.keys($scope.meter.consumption_stats);
 
         function init() {
           var meter = $scope.meter;
@@ -58,7 +59,7 @@ angular.module('app.directives')
               var startYear = startDate.getFullYear();
               var endYear = endDate.getFullYear();
 
-              meter.metrics.forEach(function(metric) {
+              $scope.metrics.forEach(function(metric) {
                 data[metric] = [];
                 var values = consumptions[0].periods[0][metric];
                 if (!values || values.length === 0) return;
@@ -99,7 +100,6 @@ angular.module('app.directives')
                     series: series
                   });
                 }
-
               });
 
               $scope.data = data;
