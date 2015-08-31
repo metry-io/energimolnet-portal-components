@@ -5,7 +5,7 @@ angular.module('portal-components')
     restrict: 'E',
     replace: true,
     template: '<div class="em-batch-checkbox">' +
-                '<input type="checkbox" ng-model="items[index]" ng-change="change()">' +
+                '<input type="checkbox" ng-model="items[index]" ng-change="change()" ng-click="prevent($event)">' +
               '</div>',
     scope: {
       index: '=emIndex'
@@ -18,6 +18,10 @@ angular.module('portal-components')
 
       scope.change = function() {
         batchMgr.select(scope.index, scope.items[scope.index]);
+      };
+
+      scope.prevent = function(event) {
+        event.stopPropagation();
       };
     }
   };
