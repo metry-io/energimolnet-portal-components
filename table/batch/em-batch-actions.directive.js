@@ -6,10 +6,10 @@ angular.module('portal-components')
     replace: true,
     transclude: true,
     template: '<div class="dropdown" dropdown>' +
-                '<button class="btn btn-primary dropdown-toggle" dropdown-toggle style="padding: 6px">' +
+                '<div class="btn btn-primary dropdown-toggle" dropdown-toggle style="padding: 6px">' +
                   '<input type="checkbox" ng-model="batchMgr.allSelected" ng-change="change()" ng-click="stopProp($event)">' +
                   '<span class="caret" style="margin-left: 10px"></span>' +
-                '</button>' +
+                '</div>' +
                 '<ul class="dropdown-menu" ng-transclude></ul>' +
               '</div>',
     scope: {},
