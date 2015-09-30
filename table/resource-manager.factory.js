@@ -5,13 +5,20 @@ angular.module('portal-components')
   '$modal',
   '$location',
   function($timeout, $modal,  $location) {
-    function ResourceManager(Resource, filter, refreshTime, batchCallback) {
+    function ResourceManager(Resource, filter, refreshTime, batchCallback, preventSearchUpdate) {
       this.Resource = Resource;
       this.refreshTime = (refreshTime === undefined) ? false : refreshTime;
       this.loading = false;
       this.data = [];
       this.pagination = {};
-      this.filter = angular.extend(filter || {}, $location.search());
+      this.preventSearchUpdate = preventSearchUpdate;
+
+      this.filter = angular.copy(filter);
+
+      if (!preventSearchUpdate) {
+        this.filter = angular.extend(filter || {}, $location.search());
+      }
+
       this.batchMgr = undefined;
       this.batchCallback = batchCallback;
 
@@ -24,13 +31,21 @@ angular.module('portal-components')
     ResourceManager.prototype.setFilterOption = function setFilter(key, value) {
       this.filter[key] = value;
       this.filter.skip = 0;
-      $location.search(this.filter).replace();
+
+      if (!this.preventSearchUpdate) {
+        $location.search(this.filter).replace();
+      }
+
       this.getData();
     };
 
     ResourceManager.prototype.updatePage = function updatePage() {
       this.filter.skip = this.pagination.limit * (this.pagination.page - 1);
-      $location.search(this.filter).replace();
+
+      if (!this.preventSearchUpdate) {
+        $location.search(this.filter).replace();
+      }
+
       this.getData();
     };
 
