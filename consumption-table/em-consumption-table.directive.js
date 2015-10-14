@@ -62,11 +62,13 @@ angular.module('app.directives')
               $scope.metrics.forEach(function(metric) {
                 data[metric] = [];
                 var values = consumptions[0].periods[0][metric];
-                if (!values || values.length === 0) return;
-
-                // The metric's data availability boundaries
                 var metricStartDate = dateUtil.getDate(stats[metric].month.first);
                 var metricEndDate = dateUtil.getDate(stats[metric].month.last);
+
+                if (!values || values.length === 0 ||
+                    !metricStartDate || !metricEndDate) return;
+
+                // The metric's data availability boundaries
                 var firstYear = metricStartDate.getFullYear();
                 var lastYear = metricEndDate.getFullYear();
 
