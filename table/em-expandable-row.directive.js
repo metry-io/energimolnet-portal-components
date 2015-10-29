@@ -9,6 +9,7 @@ angular.module('app.directives')
       restrict: 'A',
       scope: {
         contentDirective: '@emExpandableRow',
+        expandableIf: '=emExpandableIf',
         model: '=emModel'
       },
       link: function(scope, element, attrs) {
@@ -16,6 +17,8 @@ angular.module('app.directives')
         var contentRow = element.next().children().eq(0);
 
         element.on('click', function(event) {
+          if (!scope.expandableIf) return;
+
           element.toggleClass('em-expanded');
           contentRow.toggleClass('em-expanded');
 
