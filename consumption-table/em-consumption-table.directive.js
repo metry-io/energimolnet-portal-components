@@ -11,7 +11,7 @@ angular.module('app.directives')
     return {
       restrict: 'E',
       scope: true,
-      template: '<div class="em-consumption-header"><div class="btn-group" ng-if="metrics.length > 1" class="text-center"><label class="btn btn-primary btn-sm" ng-model="$parent.$parent.selectedMetric" btn-radio="\'{{metric}}\'" ng-repeat="metric in metrics">{{ metric | metricName }}</label></div></div><table ng-show="!loading && data != null" class="em-consumption-table"><thead><tr><th></th><th>jan</th><th>feb</th><th>mar</th><th>apr</th><th>maj</th><th>jun</th><th>jul</th><th>aug</th><th>sep</th><th>okt</th><th>nov</th><th>dec</th><th></th></tr></thead><tbody><tr ng-repeat="year in data[selectedMetric]"><td>{{year.year}}</td><td ng-repeat="month in year.series track by $index" ng-bind-html="::month | consumptionValue | trust"></td><td></td></tr></tbody></table><div ng-show="!loading && data == null" style="height: 80px" class="em-flexbox em-flex-vertical em-flex-justify-center"><div class="text-center">Det finns ingen insamlad data för denna mätpunkt.</div></div><div ng-show="loading" style="height: 80px" class="em-spinner-dark"></div>',
+      template: '<div class="em-consumption-header"><div class="btn-group" ng-if="metrics.length > 1" class="text-center"><label class="btn btn-primary btn-sm" ng-model="$parent.$parent.selectedMetric" btn-radio="\'{{metric}}\'" ng-repeat="metric in metrics">{{ metric | metricName }}</label></div></div><table ng-show="!loading && data != null" class="em-consumption-table"><thead><tr><th></th><th>jan</th><th>feb</th><th>mar</th><th>apr</th><th>maj</th><th>jun</th><th>jul</th><th>aug</th><th>sep</th><th>okt</th><th>nov</th><th>dec</th><th>årsförbrukning</th></tr></thead><tbody><tr ng-repeat="year in data[selectedMetric]"><td>{{year.year}}</td><td ng-repeat="month in year.series track by $index" ng-bind-html="::month | consumptionValue | trust"></td><td>{{ year.sum | consumptionValue }}</tr></tbody></table><div ng-show="!loading && data == null" style="height: 80px" class="em-flexbox em-flex-vertical em-flex-justify-center"><div class="text-center">Det finns ingen insamlad data för denna mätpunkt.</div></div><div ng-show="loading" style="height: 80px" class="em-spinner-dark"></div>',
       controller: ['$scope', function($scope) {
         $scope.data = undefined;
         $scope.loading = false;
@@ -98,7 +98,8 @@ angular.module('app.directives')
 
                   data[metric].push({
                     year: year,
-                    series: series
+                    series: series,
+                    sum: sumArray(series)
                   });
                 }
               });
@@ -112,3 +113,17 @@ angular.module('app.directives')
     };
   }
 ]);
+
+function sumArray(array) {
+  var sum = 0;
+
+  for (var i = 0, l = array.length; i < l; i++) {
+    var value = array[i];
+
+    if (typeof value === 'number') {
+      sum += value;
+    }
+  }
+
+  return sum;
+}
