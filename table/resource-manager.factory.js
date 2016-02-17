@@ -96,8 +96,8 @@ angular.module('portal-components')
       this.Resource.query(params).then(function(res) {
         if (angular.equals(params, _this._lastParams)) {
           _this.loading = false;
-          _this.data = res.data;
-          _this.pagination = res.pagination;
+          _this.data = res.data || res;
+          _this.pagination = res.pagination || {page: 1};
           _this.setRefreshTimeout();
 
           if (_this.batchMgr) {
